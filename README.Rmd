@@ -1,0 +1,132 @@
+---
+output: github_document
+bibliography: inst/REFERENCES.bib
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+
+Sys.setenv(OPENSSL_CONF="/dev/null")
+```
+
+# AncReg
+  
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/markusul/AncReg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/markusul/AncReg/actions/workflows/R-CMD-check.yaml)
+![CRAN Downloads overall](https://cranlogs.r-pkg.org/badges/grand-total/AncReg?color=brightgreen)
+<!-- badges: end -->
+
+Ancestor Regression (AncReg) is a package with methods to test for ancestral connections in linear structural equation models (@schultheiss2024ancestorregressionstructuralvector) and structural vector autoregressive models (@ancestor). Ancestor Regression provides explicit error control for false causal discovery, at least asymptotically. To have power, however, it relies on non-Gaussian distributions for power.
+
+## Installation
+
+To install the Ancestor Regression R package from CRAN, just run
+
+``` r
+install.packages(AncReg)
+```
+
+
+You can install the development version of AncReg from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("markusul/AncReg")
+```
+
+or
+
+``` r
+# install.packages('pak')
+pak::pkg_install('markusul/AncReg')
+```
+
+## linear structural equation models
+
+This is a basic example on how to use Ancestor Regression using some simulated data.
+
+```{r lsem-sim}
+library(AncReg)
+
+# random DAGS for simulation
+set.seed(42)
+
+p <- 5 #number of nodes
+DAG <- pcalg::randomDAG(p, prob = 0.5)
+
+B <- matrix(0, p, p) # represent DAG as matrix
+for (i in 2:p){
+  for(j in 1:(i-1)){
+    # store edge weights
+    B[i,j] <- max(0, DAG@edgeData@data[[paste(j,"|",i, sep="")]]$weight)
+  }
+}
+colnames(B) <- rownames(B) <- LETTERS[1:p]
+
+# solution in terms of noise
+Bprime <- MASS::ginv(diag(p) - B)
+
+n <- 500
+N <- matrix(rexp(n * p), ncol = p)
+X <- t(Bprime %*% t(N))
+colnames(X) <- LETTERS[1:p]
+
+# fit Ancestor Regression
+fit <- AncReg(X)
+fit
+```
+
+The summary function can be used to collect and organize the p-values. Additionally 
+it returns estimated ancestral graphs.
+
+```{r lsem-sum}
+# collect ancestral p-values and graph
+res <- summary(fit)
+res
+```
+
+As we know the truth in the simulated model, we can compare the estimated ancestral graph 
+with the true one.
+
+```{r lsem-plot}
+#compare true and estimated ancestral graph
+trueGraph <- igraph::graph_from_adjacency_matrix(recAncestor(B != 0))
+ancGraph <- igraph::graph_from_adjacency_matrix(res$graph)
+
+par(mfrow = c(1, 2))
+plot(trueGraph, main = 'true ancestral graph', vertex.size = 30)
+plot(ancGraph, main = 'Ancestor Regression', vertex.size = 30)
+```
+
+
+## structural vector autoregressive models
+
+We show an example of a SVAR application using the time series of geyser eruptions. (@ancestor)
+
+```{r svar}
+geyser <- MASS::geyser
+# shift waiting such that it is waiting after erruption
+geyser2 <- data.frame(waiting = geyser$waiting[-1], duration = geyser$duration[-nrow(geyser)])
+
+# fit ancestor regression with 6 lags considered
+fit2 <- AncReg(as.matrix(geyser2), degree = 6)
+res2 <- summary(fit2)
+res2
+
+# visualize instantaneous ancestry
+instGraph <- igraph::graph_from_adjacency_matrix(res2$inst.graph)
+plot(instGraph, edge.label = round(diag(res2$inst.p.val[1:2, 2:1]), 2), 
+     main = 'instantaneous effects', vertex.size = 90)
+
+# visualize summary of lagged ancestry
+sumGraph <- igraph::graph_from_adjacency_matrix(res2$sum.graph)
+plot(sumGraph, edge.label = round(diag(res2$sum.p.val[1:2, 2:1]), 2), 
+     main = 'summary graph', vertex.size = 90)
+```
