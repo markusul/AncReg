@@ -73,7 +73,7 @@ colnames(B) <- rownames(B) <- LETTERS[1:p]
 # solution in terms of noise
 Bprime <- MASS::ginv(diag(p) - B)
 
-n <- 500
+n <- 5000
 N <- matrix(rexp(n * p), ncol = p)
 X <- t(Bprime %*% t(N))
 colnames(X) <- LETTERS[1:p]
@@ -83,8 +83,7 @@ fit <- AncReg(X)
 fit
 ```
 
-The summary function can be used to collect and organize the p-values. Additionally 
-it returns estimated ancestral graphs.
+The summary function can be used to collect and organize the p-values. Additionally it returns estimated ancestral graphs.
 
 ```{r lsem-sum}
 # collect ancestral p-values and graph
@@ -119,6 +118,8 @@ geyser2 <- data.frame(waiting = geyser$waiting[-1], duration = geyser$duration[-
 fit2 <- AncReg(as.matrix(geyser2), degree = 6)
 res2 <- summary(fit2)
 res2
+
+par(mfrow = c(1, 2))
 
 # visualize instantaneous ancestry
 instGraph <- igraph::graph_from_adjacency_matrix(res2$inst.graph)

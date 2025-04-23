@@ -1,0 +1,9 @@
+url: https://markusul.github.io/AncReg/
+
+authors:
+  Markus Ulmer:
+    href: https://www.markus-ulmer.ch
+
+template:
+  bootstrap: 5
+
