@@ -1,13 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# AncReg
+<a href="http://www.markus-ulmer.ch/AncReg/"><img src="man/figures/logo.png" align="right" height="120" alt="AncReg website" /></a>
 
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/markusul/AncReg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/markusul/AncReg/actions/workflows/R-CMD-check.yaml)
-![CRAN Downloads
-overall](https://cranlogs.r-pkg.org/badges/grand-total/AncReg?color=brightgreen)
+\[![CRAN Downloads
+overall](https://cranlogs.r-pkg.org/badges/grand-total/AncReg?color=brightgreen)\]
 <!-- badges: end -->
 
 Ancestor Regression (AncReg) is a package with methods to test for
@@ -16,7 +16,7 @@ Schultheiss, Ulmer, and Bühlmann (2024)) and structural vector
 autoregressive models (C. Schultheiss and Bühlmann (2023)). Ancestor
 Regression provides explicit error control for false causal discovery,
 at least asymptotically. To have power, however, it relies on
-non-Gaussian distributions for power.
+non-Gaussian distributions.
 
 ## Installation
 
@@ -202,8 +202,7 @@ plot(sumGraph, edge.label = round(diag(res2$sum.p.val[1:2, 2:1]), 2),
 
 <img src="man/figures/README-svar-1.png" width="100%" />
 
-<div id="refs" class="references csl-bib-body hanging-indent"
-entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 
 <div id="ref-ancestor" class="csl-entry">
 
