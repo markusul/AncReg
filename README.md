@@ -1,13 +1,14 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Ancestor Regression <a href="http://www.markus-ulmer.ch/AncReg/"><img src="man/figures/logo.png" align="right" height="120" alt="AncReg website" /></a>
+# Ancestor Regression <a href="http://www.markus-ulmer.ch/AncReg/"><img src="man/figures/logo.png" align="right" height="175" alt="AncReg website" /></a>
 
 <!-- badges: start -->
 
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/AncReg)](https://CRAN.R-project.org/package=AncReg)
 [![R-CMD-check](https://github.com/markusul/AncReg/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/markusul/AncReg/actions/workflows/R-CMD-check.yaml)
-\[![CRAN Downloads
-overall](https://cranlogs.r-pkg.org/badges/grand-total/AncReg?color=brightgreen)\]
+![CRAN Downloads
+overall](https://cranlogs.r-pkg.org/badges/grand-total/AncReg?color=brightgreen)
 <!-- badges: end -->
 
 Ancestor Regression (AncReg) is a package with methods to test for
