@@ -2,9 +2,9 @@ Package: AncReg
 Title: Ancestor Regression
 Version: 0.0.0.9000
 Authors@R: c(
-  person("Christoph", "Schultheiss", role = "aut"))
+  person("Christoph", "Schultheiss", role = "aut"),
   person("Markus", "Ulmer", email = "markus.ulmer@stat.math.ethz.ch", 
-         role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0001-7783-8475"))
+         role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0001-7783-8475")))
 Description: Causal discovery in linear structural equation models and vector autoregressive models with explicit error control for false discovery, at least asymptomatically.
 License: GPL-3
 Encoding: UTF-8

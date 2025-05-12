@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-<a href="http://www.markus-ulmer.ch/AncReg/"><img src="man/figures/logo.png" align="right" height="120" alt="AncReg website" /></a>
+# Ancestor Regression <a href="http://www.markus-ulmer.ch/AncReg/"><img src="man/figures/logo.png" align="right" height="120" alt="AncReg website" /></a>
 
 <!-- badges: start -->
 
