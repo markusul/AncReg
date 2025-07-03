@@ -138,12 +138,7 @@ trueGraph <- igraph::graph_from_adjacency_matrix(recAncestor(B != 0))
 ancGraph <- igraph::graph_from_adjacency_matrix(res$graph)
 
 #same layout for both graphs
-l <- igraph::layout.reingold.tilford(trueGraph) 
-#> Warning: `layout.reingold.tilford()` was deprecated in igraph 2.1.0.
-#> ℹ Please use `layout_as_tree()` instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-#> generated.
+l <- igraph::layout_as_tree(trueGraph) 
 
 par(mfrow = c(1, 2))
 plot(trueGraph, main = 'true ancestral graph', vertex.size = 30, layout = l)
@@ -196,13 +191,14 @@ par(mfrow = c(1, 2))
 
 # visualize instantaneous ancestry
 instGraph <- igraph::graph_from_adjacency_matrix(res2$inst.graph)
+l <- igraph::layout_as_tree(instGraph) 
 plot(instGraph, edge.label = round(diag(res2$inst.p.val[1:2, 2:1]), 2), 
-     main = 'instantaneous effects', vertex.size = 90)
+     main = 'instantaneous effects', vertex.size = 90, layout = l)
 
 # visualize summary of lagged ancestry
 sumGraph <- igraph::graph_from_adjacency_matrix(res2$sum.graph)
 plot(sumGraph, edge.label = round(diag(res2$sum.p.val[1:2, 2:1]), 2), 
-     main = 'summary graph', vertex.size = 90)
+     main = 'summary graph', vertex.size = 90, layout = l)
 ```
 
 <img src="man/figures/README-svar-1.png" width="100%" />
