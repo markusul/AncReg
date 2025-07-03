@@ -12,9 +12,9 @@ overall](https://cranlogs.r-pkg.org/badges/grand-total/AncReg?color=brightgreen)
 <!-- badges: end -->
 
 Ancestor Regression (AncReg) is a package with methods to test for
-ancestral connections in linear structural equation models (Christoph
-Schultheiss, Ulmer, and Bühlmann (2024)) and structural vector
-autoregressive models (C. Schultheiss and Bühlmann (2023)). Ancestor
+ancestral connections in linear structural equation models (C.
+Schultheiss and Bühlmann (2023)) and structural vector autoregressive
+models (Christoph Schultheiss, Ulmer, and Bühlmann (2025)). Ancestor
 Regression provides explicit error control for false causal discovery,
 at least asymptotically. To have power, however, it relies on
 non-Gaussian distributions.
@@ -78,10 +78,6 @@ fit <- AncReg(X)
 #> Registered S3 method overwritten by 'quantmod':
 #>   method            from
 #>   as.zoo.data.frame zoo
-#> Registered S3 methods overwritten by 'tsutils':
-#>   method          from   
-#>   print.nemenyi   greybox
-#>   summary.nemenyi greybox
 fit
 #> $z.val
 #>          A.0        B.0        C.0        D.0        E.0
@@ -141,9 +137,17 @@ estimated ancestral graph with the true one.
 trueGraph <- igraph::graph_from_adjacency_matrix(recAncestor(B != 0))
 ancGraph <- igraph::graph_from_adjacency_matrix(res$graph)
 
+#same layout for both graphs
+l <- igraph::layout.reingold.tilford(trueGraph) 
+#> Warning: `layout.reingold.tilford()` was deprecated in igraph 2.1.0.
+#> ℹ Please use `layout_as_tree()` instead.
+#> This warning is displayed once every 8 hours.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
+#> generated.
+
 par(mfrow = c(1, 2))
-plot(trueGraph, main = 'true ancestral graph', vertex.size = 30)
-plot(ancGraph, main = 'Ancestor Regression', vertex.size = 30)
+plot(trueGraph, main = 'true ancestral graph', vertex.size = 30, layout = l)
+plot(ancGraph, main = 'Ancestor Regression', vertex.size = 30, layout = l)
 ```
 
 <img src="man/figures/README-lsem-plot-1.png" width="100%" />
@@ -151,7 +155,7 @@ plot(ancGraph, main = 'Ancestor Regression', vertex.size = 30)
 ## structural vector autoregressive models
 
 We show an example of a SVAR application using the time series of geyser
-eruptions. (C. Schultheiss and Bühlmann (2023))
+eruptions. (Christoph Schultheiss, Ulmer, and Bühlmann (2025))
 
 ``` r
 geyser <- MASS::geyser
@@ -203,7 +207,8 @@ plot(sumGraph, edge.label = round(diag(res2$sum.p.val[1:2, 2:1]), 2),
 
 <img src="man/figures/README-svar-1.png" width="100%" />
 
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 
 <div id="ref-ancestor" class="csl-entry">
 
@@ -216,9 +221,8 @@ Structural Equation Models.” *Biometrika* 110 (4): 1117–24.
 <div id="ref-schultheiss2024ancestorregressionstructuralvector"
 class="csl-entry">
 
-Schultheiss, Christoph, Markus Ulmer, and Peter Bühlmann. 2024.
-“Ancestor Regression in Structural Vector Autoregressive Models.”
-<https://arxiv.org/abs/2403.03778>.
+Schultheiss, Christoph, Markus Ulmer, and Peter Bühlmann. 2025. *Journal
+of Causal Inference*. <https://doi.org/10.1515/jci-2024-0011>.
 
 </div>
 
