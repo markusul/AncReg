@@ -5,7 +5,7 @@ Authors@R: c(
   person("Christoph", "Schultheiss", role = "aut"),
   person("Markus", "Ulmer", email = "markus.ulmer@stat.math.ethz.ch", 
          role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0001-7783-8475")))
-Description: Causal discovery in linear structural equation models and vector autoregressive models with explicit error control for false discovery, at least asymptomatically.
+Description: Causal discovery in linear structural equation models and vector autoregressive models with explicit error control for false discovery, at least asymptotically.
 License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
