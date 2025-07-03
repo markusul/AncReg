@@ -58,7 +58,7 @@
 </div>
 <!-- badges: start -->
 
-<p>Ancestor Regression (AncReg) is a package with methods to test for ancestral connections in linear structural equation models (Christoph Schultheiss, Ulmer, and Bühlmann (2024)) and structural vector autoregressive models (C. Schultheiss and Bühlmann (2023)). Ancestor Regression provides explicit error control for false causal discovery, at least asymptotically. To have power, however, it relies on non-Gaussian distributions.</p>
+<p>Ancestor Regression (AncReg) is a package with methods to test for ancestral connections in linear structural equation models (C. Schultheiss and Bühlmann (2023)) and structural vector autoregressive models (Christoph Schultheiss, Ulmer, and Bühlmann (2025)). Ancestor Regression provides explicit error control for false causal discovery, at least asymptotically. To have power, however, it relies on non-Gaussian distributions.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -109,10 +109,6 @@
 <span><span class="co">#&gt; Registered S3 method overwritten by 'quantmod':</span></span>
 <span><span class="co">#&gt;   method            from</span></span>
 <span><span class="co">#&gt;   as.zoo.data.frame zoo</span></span>
-<span><span class="co">#&gt; Registered S3 methods overwritten by 'tsutils':</span></span>
-<span><span class="co">#&gt;   method          from   </span></span>
-<span><span class="co">#&gt;   print.nemenyi   greybox</span></span>
-<span><span class="co">#&gt;   summary.nemenyi greybox</span></span>
 <span><span class="va">fit</span></span>
 <span><span class="co">#&gt; $z.val</span></span>
 <span><span class="co">#&gt;          A.0        B.0        C.0        D.0        E.0</span></span>
@@ -164,15 +160,23 @@
 <span><span class="va">trueGraph</span> <span class="op">&lt;-</span> <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://r.igraph.org/reference/graph_from_adjacency_matrix.html" class="external-link">graph_from_adjacency_matrix</a></span><span class="op">(</span><span class="fu"><a href="reference/recAncestor.html">recAncestor</a></span><span class="op">(</span><span class="va">B</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">ancGraph</span> <span class="op">&lt;-</span> <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://r.igraph.org/reference/graph_from_adjacency_matrix.html" class="external-link">graph_from_adjacency_matrix</a></span><span class="op">(</span><span class="va">res</span><span class="op">$</span><span class="va">graph</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co">#same layout for both graphs</span></span>
+<span><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu">igraph</span><span class="fu">::</span><span class="fu"><a href="https://r.igraph.org/reference/layout.reingold.tilford.html" class="external-link">layout.reingold.tilford</a></span><span class="op">(</span><span class="va">trueGraph</span><span class="op">)</span> </span>
+<span><span class="co">#&gt; Warning: `layout.reingold.tilford()` was deprecated in igraph 2.1.0.</span></span>
+<span><span class="co">#&gt; ℹ Please use `layout_as_tree()` instead.</span></span>
+<span><span class="co">#&gt; This warning is displayed once every 8 hours.</span></span>
+<span><span class="co">#&gt; Call `lifecycle::last_lifecycle_warnings()` to see where this warning was</span></span>
+<span><span class="co">#&gt; generated.</span></span>
+<span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">trueGraph</span>, main <span class="op">=</span> <span class="st">'true ancestral graph'</span>, vertex.size <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ancGraph</span>, main <span class="op">=</span> <span class="st">'Ancestor Regression'</span>, vertex.size <span class="op">=</span> <span class="fl">30</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">trueGraph</span>, main <span class="op">=</span> <span class="st">'true ancestral graph'</span>, vertex.size <span class="op">=</span> <span class="fl">30</span>, layout <span class="op">=</span> <span class="va">l</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">ancGraph</span>, main <span class="op">=</span> <span class="st">'Ancestor Regression'</span>, vertex.size <span class="op">=</span> <span class="fl">30</span>, layout <span class="op">=</span> <span class="va">l</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-lsem-plot-1.png" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="structural-vector-autoregressive-models">structural vector autoregressive models<a class="anchor" aria-label="anchor" href="#structural-vector-autoregressive-models"></a>
 </h2>
-<p>We show an example of a SVAR application using the time series of geyser eruptions. (C. Schultheiss and Bühlmann (2023))</p>
+<p>We show an example of a SVAR application using the time series of geyser eruptions. (Christoph Schultheiss, Ulmer, and Bühlmann (2025))</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">geyser</span> <span class="op">&lt;-</span> <span class="fu">MASS</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/pkg/MASS/man/geyser.html" class="external-link">geyser</a></span></span>
 <span><span class="co"># shift waiting such that it is waiting after erruption</span></span>
@@ -220,12 +224,12 @@
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">sumGraph</span>, edge.label <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">res2</span><span class="op">$</span><span class="va">sum.p.val</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>, </span>
 <span>     main <span class="op">=</span> <span class="st">'summary graph'</span>, vertex.size <span class="op">=</span> <span class="fl">90</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-svar-1.png" width="100%"></p>
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
 <div id="ref-ancestor" class="csl-entry">
 Schultheiss, C, and P Bühlmann. 2023. “Ancestor Regression in Linear Structural Equation Models.” <em>Biometrika</em> 110 (4): 1117–24. <a href="https://doi.org/10.1093/biomet/asad008" class="external-link uri">https://doi.org/10.1093/biomet/asad008</a>.
 </div>
 <div id="ref-schultheiss2024ancestorregressionstructuralvector" class="csl-entry">
-Schultheiss, Christoph, Markus Ulmer, and Peter Bühlmann. 2024. “Ancestor Regression in Structural Vector Autoregressive Models.” <a href="https://arxiv.org/abs/2403.03778" class="external-link uri">https://arxiv.org/abs/2403.03778</a>.
+Schultheiss, Christoph, Markus Ulmer, and Peter Bühlmann. 2025. <em>Journal of Causal Inference</em>. <a href="https://doi.org/10.1515/jci-2024-0011" class="external-link uri">https://doi.org/10.1515/jci-2024-0011</a>.
 </div>
 </div>
 </div>
