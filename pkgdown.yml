@@ -2,7 +2,7 @@ pandoc: 3.1.11
 pkgdown: 2.1.3
 pkgdown_sha: ~
 articles: {}
-last_built: 2025-07-04T07:09Z
+last_built: 2025-07-04T07:16Z
 urls:
   reference: http://www.markus-ulmer.ch/AncReg/reference
   article: http://www.markus-ulmer.ch/AncReg/articles
