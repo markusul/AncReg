@@ -50,7 +50,7 @@
 #' trueGraph <- igraph::graph_from_adjacency_matrix(recAncestor(B != 0))
 #' ancGraph <- igraph::graph_from_adjacency_matrix(res$graph)
 #'
-#' par(mfrow = c(1, 2))
+#' oldpar <- par(mfrow = c(1, 2))
 #' plot(trueGraph, main = 'true ancestral graph', vertex.size = 30)
 #' plot(ancGraph, main = 'Ancestor Regression', vertex.size = 30)
 #'
@@ -73,6 +73,7 @@
 #' sumGraph <- igraph::graph_from_adjacency_matrix(res2$sum.graph)
 #' plot(sumGraph, edge.label = round(diag(res2$sum.p.val[1:2, 2:1]), 2),
 #'      main = 'summary graph', vertex.size = 90)
+#' par(oldpar)
 AncReg <- function(x, degree = 0, targets = colnames(x), f = function(x) x^3){
   # input control
   if(!is.matrix(x) || !is.numeric(x)){
