@@ -1,6 +1,6 @@
 Package: AncReg
 Title: Ancestor Regression
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: c(
   person("Christoph", "Schultheiss", role = "aut"),
   person("Markus", "Ulmer", email = "markus.ulmer@stat.math.ethz.ch", 
